@@ -1,1 +1,15 @@
-int	memcmp(const void *s1, const void *s2, size_t n);
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vcollazo <vcollazo@student.42madrid>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/09/22 13:05:46 by vcollazo          #+#    #+#             */
+/*   Updated: 2021/09/22 13:06:28 by vcollazo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+int	ft_memcmp(const void *s1, const void *s2, size_t n);

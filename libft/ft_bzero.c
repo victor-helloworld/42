@@ -6,8 +6,10 @@
 /*   By: vcollazo <vcollazo@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/16 11:01:19 by vcollazo          #+#    #+#             */
-/*   Updated: 2021/09/16 11:04:10 by vcollazo         ###   ########.fr       */
+/*   Updated: 2021/09/22 12:49:05 by vcollazo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	bzero(void *s, size_t n);
+#include "libft.h"
+
+void	ft_bzero(void *s, size_t n);

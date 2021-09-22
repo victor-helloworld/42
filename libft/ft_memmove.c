@@ -1,1 +1,15 @@
-void	*memmove(void *dst, const void *src, size_t len);
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vcollazo <vcollazo@student.42madrid>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/09/22 13:07:38 by vcollazo          #+#    #+#             */
+/*   Updated: 2021/09/22 13:07:54 by vcollazo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+void	*ft_memmove(void *dst, const void *src, size_t len);

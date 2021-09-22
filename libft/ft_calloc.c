@@ -1,13 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   calloc.c                                           :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vcollazo <vcollazo@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 22:45:02 by vcollazo          #+#    #+#             */
-/*   Updated: 2021/09/14 22:46:14 by vcollazo         ###   ########.fr       */
+/*   Updated: 2021/09/22 12:49:30 by vcollazo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	*calloc(size_t count, size_t size);
+#include "libft.h"
+
+void	*ft_calloc(size_t count, size_t size);

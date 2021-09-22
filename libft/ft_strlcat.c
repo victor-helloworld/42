@@ -1,1 +1,15 @@
-size_t	strlcat(char * restrict dst, const char * restrict src, size_t dstsize);
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vcollazo <vcollazo@student.42madrid>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/09/22 12:54:51 by vcollazo          #+#    #+#             */
+/*   Updated: 2021/09/22 13:12:27 by vcollazo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
