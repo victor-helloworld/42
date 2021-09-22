@@ -84,10 +84,11 @@ ${NAME}:	${OBJS}
 # Main rule is defined as "all"
 all:		${NAME}
 
-clean:		${RM} *.o	
+clean:
+	${RM} *.o	
 
 fclean:		clean
-		${RM} ${NAME}
+	${RM} ${NAME}
 
 run:		re
 		./a.out

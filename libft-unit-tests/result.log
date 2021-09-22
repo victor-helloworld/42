@@ -1,101 +1,66 @@
-ft_memset:     
-ft_bzero:      [MISSING]
-ft_memcpy:     [MISSING]
+ft_memset:     [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
+ft_bzero:      [OK] [OK] [OK] [OK] 
+ft_memcpy:     [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
 ft_memccpy:    [MISSING]
-ft_memmove:    [MISSING]
-ft_memchr:     [MISSING]
-ft_memcmp:     [MISSING]
-ft_strlen:     [MISSING]
-ft_isalpha:    [FAILED] 
-[fail]: your isalpha just doesn't work, REALLY ?!
-Test code:
-	int i;
-
-	i = -1;
-	while (i < 530)
-	{
-		if (!!ft_isalpha(i) != !!isalpha(i))
-			exit(TEST_FAILED);
-		i++;
-	}
-	exit(TEST_SUCCESS);
-
-Diffs:
-
-
+ft_memmove:    [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
+ft_memchr:     [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
+ft_memcmp:     [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
+ft_strlen:     [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
+ft_isalpha:    [OK] 
 ft_isdigit:    [OK] 
-ft_isalnum:    [FAILED] 
-[fail]: your isalnum just doesn't work, REALLY ?!
-Test code:
-	int i;
-
-	i = -1;
-	while (i < 530)
-	{
-		if (!!ft_isalnum(i) != !!isalnum(i))
-			exit(TEST_FAILED);
-		i++;
-	}
-	exit(TEST_SUCCESS);
-
-Diffs:
-
-
-ft_isascii:    [MISSING]
-ft_isprint:    [MISSING]
+ft_isalnum:    [OK] 
+ft_isascii:    [OK] 
+ft_isprint:    [OK] 
 ft_toupper:    [MISSING]
 ft_tolower:    [MISSING]
-ft_strchr:     [MISSING]
+ft_strchr:     [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
 ft_strrchr:    [MISSING]
 ft_strncmp:    [MISSING]
 ft_strlcpy:    [MISSING]
 ft_strlcat:    [MISSING]
 ft_strnstr:    [MISSING]
-ft_atoi:       [OK] [OK] [OK] [FAILED] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [KO] [KO] [OK] [OK] [OK] [OK] 
-[fail]: your atoi is not working with blanks
+ft_atoi:       [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
+ft_calloc:     [MISSING]
+ft_strdup:     [CRASH] [OK] [CRASH] [KO] [OK] [OK] [OK] 
+[crash]: you didn't protect your malloc return
 Test code:
-	char *n = "\t\v\f\r\n \f-06050";
-	int i1 = atoi(n);
-	int i2 = ft_atoi(n);
+	char *ptr;
 
-	if (i1 == i2)
+	ptr = ft_strdup("lol");
+	if (!ptr)
 		exit(TEST_SUCCESS);
 	exit(TEST_FAILED);
 
-Diffs:
-        atoi: |-6050|
-     ft_atoi: |0|
 
-[KO]: your atoi does not work with over long max value
+[crash]: your strdup don't work with empty string
 Test code:
-	char n[40] = "99999999999999999999999999";
-	int i1 = atoi(n);
-	int i2 = ft_atoi(n);
+	char *str;
+	char *tmp = "";
 
-	if (i1 == i2)
+	str = ft_strdup(tmp);
+	if (strcmp(str, tmp))
+		exit(TEST_FAILED);
+	free(str);
+	exit(TEST_SUCCESS);
+
+
+[KO]: your strdup did not allocate the good size so the \0 test may be false
+Test code:
+	char *str;
+	char *tmp = "this is a normal test";
+	int r_size = strlen(tmp);
+	int size;
+
+	str = ft_strdup(tmp);
+	size = get_last_malloc_size();
+	if (size == r_size + 1)
 		exit(TEST_SUCCESS);
 	exit(TEST_KO);
 
 Diffs:
-        atoi: |-1|
-     ft_atoi: |-469762049|
+      strdup: |22|
+   ft_strdup: |21|
 
-[KO]: your atoi does not work with over long min value
-Test code:
-	char n[40] = "-99999999999999999999999999";
-	int i1 = atoi(n);
-	int i2 = ft_atoi(n);
-
-	if (i1 == i2)
-		exit(TEST_SUCCESS);
-	exit(TEST_KO);
-
-Diffs:
-        atoi: |0|
-     ft_atoi: |469762049|
-
-ft_calloc:     [MISSING]
-ft_strdup:     [MISSING]
 ft_substr:     [MISSING]
 ft_strjoin:    [MISSING]
 ft_strtrim:    [MISSING]
@@ -115,37 +80,3 @@ ft_lstdelone:  [MISSING]
 ft_lstclear:   [MISSING]
 ft_lstiter:    [MISSING]
 ft_lstmap:     [MISSING]
-ft_islower:    [FAILED] 
-[fail]: your islower does not work ...
-Test code:
-	for (int i = -50; i < 530; i++)
-
-	{
-		if (!!ft_islower(i) != !!islower(i))
-		{
-			exit(TEST_FAILED);
-		}
-	}
-	exit(TEST_SUCCESS);
-
-Diffs:
-     islower: |0|
-  ft_islower: |97|
-
-ft_isupper:    [FAILED] 
-[fail]: your isupper does not work ...
-Test code:
-	for (int i = -50; i < 530; i++)
-
-	{
-		if (!!ft_isupper(i) != !!isupper(i))
-		{
-			exit(TEST_FAILED);
-		}
-	}
-	exit(TEST_SUCCESS);
-
-Diffs:
-     isupper: |0|
-  ft_isupper: |65|
-
