@@ -9,15 +9,15 @@ git config --global credential.helper cache
 ///////////////////////////////////////////////////////////////////////////////
 #Token 1
 	#Type:		Personal token
-	#Generated:	September 15 2021
+	#Generated:	September 23 2021
 	#Validity:	unlimited
 	#Use:		Xiaomi laptop and personal devices
-	#key:		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
+	#key:		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
 
 #Token 2
 	#Type:		42 token
-	#Generated:	September 14 2021
+	#Generated:	September 22 2021
 	#Validity:	30 days
 	#Use:		42 school
-	#key:		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
+	#key:		****************************************
 ///////////////////////////////////////////////////////////////////////////////

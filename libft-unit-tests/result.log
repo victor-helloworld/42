@@ -8,19 +8,169 @@ ft_memcmp:     [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK]
 ft_strlen:     [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
 ft_isalpha:    [OK] 
 ft_isdigit:    [OK] 
-ft_isalnum:    [OK] 
+ft_isalnum:    [FAILED] 
+[fail]: your isalnum just doesn't work, REALLY ?!
+Test code:
+	int i;
+
+	i = -1;
+	while (i < 530)
+	{
+		if (!!ft_isalnum(i) != !!((*__ctype_b_loc ())[(int) ((i))] & (unsigned short int) _ISalnum))
+			exit(TEST_FAILED);
+		i++;
+	}
+	exit(TEST_SUCCESS);
+
+Diffs:
+
+
 ft_isascii:    [OK] 
 ft_isprint:    [OK] 
-ft_toupper:    [MISSING]
-ft_tolower:    [MISSING]
+ft_toupper:    [FAILED] 
+[fail]: your toupper just doesn't work, REALLY ?!
+Test code:
+	int i;
+
+	i = -100;
+	while (i < 530)
+	{
+		if (ft_toupper(i) != (__extension__ ({ int __res; if (sizeof (i) > 1) { if (__builtin_constant_p (i)) { int __c = (i); __res = __c < -128 || __c > 255 ? __c : (*__ctype_toupper_loc ())[__c]; } else __res = toupper (i); } else __res = (*__ctype_toupper_loc ())[(int) (i)]; __res; })))
+		{
+				;
+			exit(TEST_FAILED);
+		}
+		i++;
+	}
+	exit(TEST_SUCCESS);
+
+Diffs:
+     toupper: |156|
+  ft_toupper: |-100|
+param: (-100)
+
+ft_tolower:    [FAILED] 
+[fail]: your tolower just doesn't work, REALLY ?!
+Test code:
+	int i;
+
+	i = -100;
+	while (i < 530)
+	{
+		if (ft_tolower(i) != (__extension__ ({ int __res; if (sizeof (i) > 1) { if (__builtin_constant_p (i)) { int __c = (i); __res = __c < -128 || __c > 255 ? __c : (*__ctype_tolower_loc ())[__c]; } else __res = tolower (i); } else __res = (*__ctype_tolower_loc ())[(int) (i)]; __res; })))
+		{
+				;
+			exit(TEST_FAILED);
+		}
+		i++;
+	}
+	exit(TEST_SUCCESS);
+
+Diffs:
+     tolower: |156|
+  ft_tolower: |-100|
+param: (-100)
+
 ft_strchr:     [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
-ft_strrchr:    [MISSING]
-ft_strncmp:    [MISSING]
-ft_strlcpy:    [MISSING]
-ft_strlcat:    [MISSING]
-ft_strnstr:    [MISSING]
+ft_strrchr:    [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
+ft_strncmp:    [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
+ft_strlcpy:    [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
+ft_strlcat:    [OK] [OK] [CRASH] [CRASH] [OK] [CRASH] [CRASH] [CRASH] [CRASH] [OK] [OK] [OK] 
+[crash]: your strlcat does not work with basic input
+Test code:
+	char *str = "the cake is a lie !\0I'm hidden lol\r\n";
+	char buff1[0xF00] = "there is no stars in the sky";
+	char buff2[0xF00] = "there is no stars in the sky";
+	size_t max = strlen("the cake is a lie !\0I'm hidden lol\r\n") + strlen("there is no stars in the sky");
+
+	strlcat(buff1, str, max);
+	ft_strlcat(buff2, str, max);
+	if (!strcmp(buff1, buff2))
+		exit(TEST_SUCCESS);
+	exit(TEST_FAILED);
+
+
+[crash]: your strlcat does not work with over length size
+Test code:
+	char *str = "the cake is a lie !\0I'm hidden lol\r\n";
+	char buff1[0xF00] = "there is no stars in the sky";
+	char buff2[0xF00] = "there is no stars in the sky";
+	size_t max = 1000;
+
+	strlcat(buff1, str, max);
+	ft_strlcat(buff2, str, max);
+	if (!strcmp(buff1, buff2))
+		exit(TEST_SUCCESS);
+	exit(TEST_FAILED);
+
+
+[crash]: your strcat does not work with empty string as first parameter
+Test code:
+	char *str = "";
+	char buff1[0xF00] = "there is no stars in the sky";
+	char buff2[0xF00] = "there is no stars in the sky";
+	size_t max = strlen("there is no stars in the sky") + 1;
+
+	strlcat(buff1, str, max);
+	ft_strlcat(buff2, str, max);
+	if (!strcmp(buff1, buff2))
+		exit(TEST_SUCCESS);
+	exit(TEST_FAILED);
+
+
+[crash]: your strcat does not work with empty string as second parameter
+Test code:
+	char *str = "the cake is a lie !\0I'm hidden lol\r\n";
+	char buff1[0xF00] = "";
+	char buff2[0xF00] = "";
+	size_t max = strlen("the cake is a lie !\0I'm hidden lol\r\n") + 1;
+
+	strlcat(buff1, str, max);
+	ft_strlcat(buff2, str, max);
+	if (!strcmp(buff1, buff2))
+		exit(TEST_SUCCESS);
+	exit(TEST_FAILED);
+
+
+[crash]: your strlcat does not set a \0 to the end
+Test code:
+	char *str = "n\0AA";
+	char buff1[0xF00] = "\0AAAAAAAAAAAAAAAA";
+	char buff2[0xF00] = "\0AAAAAAAAAAAAAAAA";
+	size_t max = 10;
+
+	strlcat(buff1, str, max);
+	ft_strlcat(buff2, str, max);
+	if (!strcmp(buff1, buff2))
+		exit(TEST_SUCCESS);
+	exit(TEST_FAILED);
+
+
+[crash]: your strlcat crash because it read too many bytes or attempt to write on buff !
+Test code:
+	const size_t size = 10;
+	char *str = electric_alloc(size);
+	char *buff = electric_alloc(size);
+
+	strcpy(buff, "AB");
+	strcpy(str, "CDEFGHI");
+	ft_strlcat(buff, str, 10);
+	exit(TEST_SUCCESS);
+
+
+ft_strnstr:    [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [NO CRASH] [NO CRASH] 
+[no crash]: your strnstr does not segfault when null parameter is sent
+Test code:
+	ft_strnstr("fake", ((void*)0), 3);
+
+
+[no crash]: your strnstr does not segfault when null parameter is sent
+Test code:
+	ft_strnstr(((void*)0), "fake", 3);
+
+
 ft_atoi:       [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
-ft_calloc:     [MISSING]
+ft_calloc:     [OK] [OK] [OK] [OK] [OK] 
 ft_strdup:     [CRASH] [OK] [CRASH] [KO] [OK] [OK] [OK] 
 [crash]: you didn't protect your malloc return
 Test code:

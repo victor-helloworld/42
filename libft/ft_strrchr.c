@@ -10,4 +10,21 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-char	*ft_strrchr(const char *s, int c);
+#include "libft.h"
+
+char	*ft_strrchr(const char *s, int c)
+{
+	size_t	len;
+	len = ft_strlen(s);
+	if (s[len] == c)
+		return(char *)(s + len);
+	while (s[--len])
+	{
+		if (s[len] == c)
+			return ((char *)(s + len));
+		if (len == 0)
+			return (0);
+	}
+	return (0);
+}
+
