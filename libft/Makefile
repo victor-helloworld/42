@@ -1,3 +1,4 @@
+#Makefile for Ubuntu
 NAME	= libft.a
 
 CC	= gcc
