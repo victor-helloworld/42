@@ -1,10 +1,9 @@
 #include <stdio.h>
-#include <bsd/string.h>
+//ubuntu #include <bsd/string.h>
+#include <string.h>
 #include "libft.h"
 #include <stdlib.h>
 #include <ctype.h>
-
-//int	ft_atoi(const char *str);
 
 int main(void)
 {

@@ -1,44 +1,116 @@
-#Makefile for Ubuntu
-NAME	= libft.a
+# Tutorial makigas 
+# 	https://www.youtube.com/watch?v=jI2n8jofuRg
+# Official documentation
+# 	https://www.gnu.org/software/make/manual/make.html#toc-Overview-of-make
 
-CC	= gcc
+# VARIABLES #
+# NAME = valu# Note: To substitute a variable's value $(NAME) or ${NAME}
+# Two types of flavors
+#	- Recursively-expanded variable 	A = B
+#	- Simply expanded variable		A := B or A ::= B
 
-#Directories, Extensions
-SRCEXT	= c
-OBJEXT	= o
-LIBEXT	= a
+# RULES #
+# targets: prerequisites
+# 	command > if @command nothing will be printed in the execution
+# 	command
+# 	command
 
-#Flags, Libraries
-CFLAGS	= -Wall -Wextra -Werror
-LFLAGSM	= -rcs
-LFLAGSB = -q
-LIBNAME = libft
+# BUILT-IN RULES #
+# Rules that are always available unless the makefile explicitly overrides or
+# cancels them
+# ‘$(CC) $(CPPFLAGS) $(CFLAGS) -c’.
+# The default suffix list is: .out, .a, .ln, .o, .c, .cc, .C, .cpp, .p, .f, .F,
+# .m, .r, .y, .l, .ym, .lm, .s, .S, .mod, .sym, .def, .h, .info, .dvi, .tex,
+# .texinfo, .texi, .txinfo, .w, .ch .web, .sh, .elc, .el
 
-#Sources, Objects
-SRCSM	= $(shell find ft_*.$(SRCEXT) ! -name 'lst')
-SRCSB	= $(shell find ft_lst.$(SRCEXT))
-OBJSM	= $(SRCSM:.$(SRCEXT)=.$(OBJEXT))
-OBJSB	= $(SRCSB:.$(SRCEXT)=.$(OBJEXT))
+# RECOMPILING DEPENDENCIES
+# The the source file date changes, make will recompile. This happens when
+# source file is newer than object file
 
-all: $(NAME)
+# PATTERN RULES
+# Looks like an ordinary rule except that it contains '%'
+# %.o : %.c
+# 	gcc $(CFLAGS) -c $<
+
+# AUTOMATIC VARIABLES
+# $< The name of the first prerequisite.
+# $? The names of all the prerequisites that are newer than the target
+# $@ The file name of the target of the rule. 
+# ex.
+# programa: $(OBJS)
+# 	gcc -o $@ $?
+
+# Makefile to compile libft library
+
+SRCS = ft_atoi.c\
+       ft_bzero.c\
+       ft_calloc.c\
+       ft_isalnum.c\
+       ft_isalpha.c\
+       ft_isascii.c\
+       ft_isdigit.c\
+       ft_isprint.c\
+       ft_memchr.c\
+       ft_memcmp.c\
+       ft_memcpy.c\
+       ft_memmove.c\
+       ft_memset.c\
+       ft_strchr.c\
+       ft_strdup.c\
+       ft_strlcat.c\
+       ft_strlcpy.c\
+       ft_strlen.c\
+       ft_strncmp.c\
+       ft_strnstr.c\
+       ft_strrchr.c\
+       ft_tolower.c\
+       ft_toupper.c\
+	   ft_itoa.c\
+	   ft_putchar_fd.c\
+	   ft_putendl_fd.c\
+	   ft_putnbr_fd.c\
+	   ft_putstr_fd.c\
+	   ft_split.c\
+	   ft_strjoin.c\
+	   ft_strmapi.c\
+	   ft_striteri.c\
+	   ft_strtrim.c\
+	   ft_substr.c
+
+OBJS = ${SRCS:.c=.o}
+
+NAME = libft.a
+
+CC = gcc
+
+CFLAGS = -Wall -Werror -Wextra
+
+RM = rm -f
+
+.c.o: 		$(SRCS)
+			${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
+
+${NAME}:	${OBJS}
+			ar rc $(NAME) $?
+
+# Main rule is defined as "all"
+all:		${NAME}
+
+run:		re
+			./a.out
+
+bonus:		$(BONUS_OBJS)
+			ar rc $(NAME) $?
 
 clean:
-	rm -f $(OBJSM)
-	rm -f $(OBJSB)
+			${RM} *.o	
 
-fclean: clean
-	rm -f $(LIBNAME).$(LIBEXT)
+fclean:		clean
+			${RM} ${NAME}
 
-re:	fclean all
+re:		fclean all fclean
 
-$(NAME): $(OBJSM)
-	ar $(LFLAGSM) $(LIBNAME).$(LIBEXT) $(OBJSM)
-
-bonus: $(OBJSM) $(OBJSB)
-	ar $(LFLAGSB) $(LIBNAME).$(LIBEXT) $(OBJSB)
-
-so:
-	$(CC) -nostartfiles -fPIC $(CFLAGS) $(SRCSM)
-	gcc -nostartfiles -shared -o libft.so $(OBJSM)
-
-.PHONY: all clean fclean re
+#Makefile targets are by default "file targets"
+#"File targets" are used to build files from other files
+# .PHONY rules are fictitial rules (always out of date)
+.PHONY:		all clean fclean re

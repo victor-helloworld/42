@@ -1,37 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnstr.c                                       :+:      :+:    :+:   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vcollazo <vcollazo@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/22 13:14:35 by vcollazo          #+#    #+#             */
-/*   Updated: 2021/09/30 12:37:14 by vcollazo         ###   ########.fr       */
+/*   Created: 2021/09/30 12:49:34 by vcollazo          #+#    #+#             */
+/*   Updated: 2021/09/30 13:07:04 by vcollazo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strnstr(const char *s1, const char *s2, size_t n)
+void	ft_putchar_fd(char c, int fd)
 {
-	size_t		i;
-
-	i = 0;
-	if (s2[0] == '\0')
-		return ((char *)s1);
-	if (s2 == NULL || ft_strlen(s2) == 0)
-		return ((char *)s1);
-	if (ft_strlen(s2) > n)
-		return (NULL);
-	while (s1[i] && i < n)
-	{
-		if (ft_strncmp((char *)&s1[i], s2, ft_strlen(s2)) == 0)
-		{
-			if (i + ft_strlen(s2) > n)
-				return (NULL);
-			return ((char *)&s1[i]);
-		}
-		i++;
-	}
-	return (NULL);
+	write(fd, &c, sizeof(char));
 }

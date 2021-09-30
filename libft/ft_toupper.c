@@ -6,13 +6,13 @@
 /*   By: vcollazo <vcollazo@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 22:41:48 by vcollazo          #+#    #+#             */
-/*   Updated: 2021/09/22 22:41:54 by vcollazo         ###   ########.fr       */
+/*   Updated: 2021/09/30 12:28:09 by vcollazo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_toupper(int c)
 {
-	if (c > 96 && c < 122)
+	if (c > 96 && c < 123)
 		return (c - 32);
 	return (c);
 }

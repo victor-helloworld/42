@@ -1,33 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vcollazo <vcollazo@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/22 12:54:51 by vcollazo          #+#    #+#             */
-/*   Updated: 2021/09/30 11:48:09 by vcollazo         ###   ########.fr       */
+/*   Created: 2021/09/30 13:07:59 by vcollazo          #+#    #+#             */
+/*   Updated: 2021/09/30 16:15:53 by vcollazo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+ #include "libft.h"
 
-size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
+static void	ft_putchar(char x, int fd)
 {
-	size_t	i;
-	size_t	tsrc;
-	size_t	tdst;
+	write(fd, &x, 1);
+}
 
-	i = 0;
-	tsrc = ft_strlen(src);
-	tdst = ft_strlen(dst);
-	if (tdst >= dstsize)
-		return (tsrc + dstsize);
-	while (src[i] && (tdst + i) < (dstsize - 1))
+void	ft_putnbr_fd(int n, int fd)
+{
+	int long	i;
+
+	i = n;
+	if (i < 0)
 	{
-		dst[tdst + i] = src[i];
-		i++;
+		write(fd, "-", 1);
+		i = i * -1;
 	}
-	dst[tdst + i] = '\0';
-	return (tdst + tsrc);
+	if (i > 9)
+		ft_putnbr_fd(i / 10, fd);
+	ft_putchar(i % 10 + 48, fd);
 }

@@ -1,37 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnstr.c                                       :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vcollazo <vcollazo@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/22 13:14:35 by vcollazo          #+#    #+#             */
-/*   Updated: 2021/09/30 12:37:14 by vcollazo         ###   ########.fr       */
+/*   Created: 2021/09/30 13:07:13 by vcollazo          #+#    #+#             */
+/*   Updated: 2021/09/30 16:19:29 by vcollazo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strnstr(const char *s1, const char *s2, size_t n)
+void	ft_putendl_fd(char *s, int fd)
 {
-	size_t		i;
+	size_t	i;
+	char	x;
 
+	if (!s)
+		return ;
 	i = 0;
-	if (s2[0] == '\0')
-		return ((char *)s1);
-	if (s2 == NULL || ft_strlen(s2) == 0)
-		return ((char *)s1);
-	if (ft_strlen(s2) > n)
-		return (NULL);
-	while (s1[i] && i < n)
+	while (i != ft_strlen(s))
 	{
-		if (ft_strncmp((char *)&s1[i], s2, ft_strlen(s2)) == 0)
-		{
-			if (i + ft_strlen(s2) > n)
-				return (NULL);
-			return ((char *)&s1[i]);
-		}
+		x = s[i];
+		write(fd, &x, 1);
 		i++;
 	}
-	return (NULL);
+	write(fd, "\n", 1);
 }
