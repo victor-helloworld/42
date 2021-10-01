@@ -13,10 +13,15 @@ int main(void)
 char    dst[] = "there is no stars in the sky";
 char    src[] = "the cake is a lie !";
 t_size	size = 10;
+char	**ptr;
+
+int	i;
+**ptr = NULL;
 //	char str1[ ] = "abcdef";
 //	char str2[ ] = "abcdefghijklmnop";
 //	char c = ' ';
 
+i = -1;
 //	printf("atoi = %i\n", atoi(str));
 //	printf("ft_atoi = %i\n", ft_atoi(str));
 
@@ -56,7 +61,10 @@ t_size	size = 10;
 //	printf("strnstr(dst, src, size) = %p\n", strnstr(dst, src, 6));
 //	printf("strlcpy(dst, src, size) = %i\n", strlcpy(dst, src, 6));
 
-	printf("strlcat(dst, src, size): %%zu", strlcat(dst, src, size));
+/	printf("strlcat(dst, src, size): %%zu", strlcat(dst, src, size));
 
-	return (0);
+ptr = ft_split(str, c);
+while (ptr[++i])
+	printf("\nsplit: %s", ptr[i]);
+return (0);
 }

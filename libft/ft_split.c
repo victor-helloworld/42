@@ -6,20 +6,41 @@
 /*   By: vcollazo <vcollazo@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/01 16:01:07 by vcollazo          #+#    #+#             */
-/*   Updated: 2021/10/01 16:16:28 by vcollazo         ###   ########.fr       */
+/*   Updated: 2021/10/02 01:31:49 by vcollazo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	len(char *str)
+void	ft_putchar(char c)
 {
-	int	i;
+	write (1, &c, 1);
+}
+
+void	ft_putstr(const char *str)
+{
+	int i;
 
 	i = 0;
+
 	while (str[i])
-		i++;
-	return (i);
+	{
+		ft_putchar(str[i]);
+		i += 1;
+	}
+}
+
+void	ft_putnbr(int n)
+{
+	if(n >= 10)
+	{
+		ft_putnbr(n / 10);
+		ft_putnbr(n % 10);
+	}
+	else
+	{
+		ft_putchar(n + '0');
+	}
 }
 
 int	isin_sep(char c, char charset)
@@ -32,7 +53,7 @@ int	isin_sep(char c, char charset)
 void	fill_array(char **ptr_array, const char *str, char charset)
 {
 	int	counter;
-	int	i;
+	size_t	i;
 	int	c;
 
 	counter = -1;
@@ -45,7 +66,7 @@ void	fill_array(char **ptr_array, const char *str, char charset)
 			if (i == 0 || counter == -1)
 				++counter;
 			ptr_array[counter][++c] = str[i];
-			if (isin_sep(str[i + 1], charset) || i + 1 == len((char *)str))
+			if (isin_sep(str[i + 1], charset) || i + 1 == ft_strlen((char *)str))
 			{
 				ptr_array[counter][++c] = '\0';
 				c = -1;
@@ -89,17 +110,47 @@ char	**ft_split(char const *str, char c)
 	int		i;
 	int		l;
 
-	l = len((char *)str);
+
+	if (!str)
+		return (NULL);
+	
+	l = ft_strlen(str);
+	ft_putchar('\n');
+	ft_putstr("_________________________________________________________________________________________________________");
+	ft_putchar('\n');
+	ft_putstr("str value:");
+	ft_putstr(str);
+	ft_putstr("ªªªªlen:");
+	ft_putnbr(l);
+	ft_putstr("ªªªªchar_c:");
+	ft_putchar(c);
+	ft_putstr("ªªªªascii_c:");
+	ft_putnbr((int)c);
+	ft_putchar('\n');
+
+	//printf("\n\n\nstr: %s, len: %i, char: %c, ascii_char: %i", str, l, c, c);
 	i = -1;
 	nb_str = 0;
 	while (++i < l && str[i])
 	{
-		if (i < l - 1 && !isin_sep(str[i], c) &&  (isin_sep(str[i + 1], c)
+		ft_putnbr(i);
+		ft_putchar('\n');
+		ft_putnbr(!isin_sep(str[i], c));
+		ft_putchar('\n');
+		if (i < l - 1 && !isin_sep(str[i], c) && (isin_sep(str[i + 1], c)
 				|| str[i + 1] == '\0'))
-				++nb_str;
+				{
+					++nb_str;
+					ft_putstr("nb_str:");
+					ft_putnbr(nb_str);
+				}
 	}
+	ft_putchar('\n');
+	ft_putstr("nbr_str: ");
+	ft_putnbr(nb_str);
 	if (nb_str == 0)
 		return (NULL);
+	ft_putchar('\n');
 	ptr_array = malloc(nb_str * sizeof(char *));
 	ptr_allocation(ptr_array, str, c);
 	fill_array(ptr_array, str, c);
