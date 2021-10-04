@@ -6,7 +6,7 @@
 /*   By: vcollazo <vcollazo@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/01 16:01:07 by vcollazo          #+#    #+#             */
-/*   Updated: 2021/10/02 01:31:49 by vcollazo         ###   ########.fr       */
+/*   Updated: 2021/10/04 21:02:49 by vcollazo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,8 +108,12 @@ char	**ft_split(char const *str, char c)
 	int		nb_str;
 	char	**ptr_array;
 	int		i;
+	int		j;
 	int		l;
 
+
+	if (c == '\0')
+		return (NULL);
 
 	if (!str)
 		return (NULL);
@@ -130,29 +134,39 @@ char	**ft_split(char const *str, char c)
 
 	//printf("\n\n\nstr: %s, len: %i, char: %c, ascii_char: %i", str, l, c, c);
 	i = -1;
+	j = -1;
 	nb_str = 0;
+	if (++i == 0 && !isin_sep(str[i], c))
+		++nb_str;
 	while (++i < l && str[i])
 	{
-		ft_putnbr(i);
-		ft_putchar('\n');
-		ft_putnbr(!isin_sep(str[i], c));
-		ft_putchar('\n');
-		if (i < l - 1 && !isin_sep(str[i], c) && (isin_sep(str[i + 1], c)
+//		ft_putnbr(i);
+//		ft_putchar('\n');
+//		ft_putstr("is in sep (0 is not):");
+//		ft_putnbr(isin_sep(str[i], c));
+//		ft_putchar('\n');
+		if (i < l - 1 && ((isin_sep(str[i], c) && !isin_sep(str[i + 1], c))
 				|| str[i + 1] == '\0'))
 				{
 					++nb_str;
-					ft_putstr("nb_str:");
+					ft_putstr("nb_str_while:");
 					ft_putnbr(nb_str);
+					ft_putchar('\n');
 				}
 	}
-	ft_putchar('\n');
-	ft_putstr("nbr_str: ");
-	ft_putnbr(nb_str);
 	if (nb_str == 0)
 		return (NULL);
-	ft_putchar('\n');
-	ptr_array = malloc(nb_str * sizeof(char *));
+	ptr_array = malloc((nb_str + 1) * sizeof(char *));
+	if (!ptr_array)
+		return (NULL);
 	ptr_allocation(ptr_array, str, c);
 	fill_array(ptr_array, str, c);
+	ptr_array[nb_str] = 0;
+	while (ptr_array[++j])
+	{
+		ft_putstr("split_array: ");
+		ft_putstr(ptr_array[j]);
+		ft_putchar('\n');
+	}
 	return (ptr_array);
 }

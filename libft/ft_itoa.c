@@ -6,7 +6,7 @@
 /*   By: vcollazo <vcollazo@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/30 13:09:48 by vcollazo          #+#    #+#             */
-/*   Updated: 2021/09/30 16:22:50 by vcollazo         ###   ########.fr       */
+/*   Updated: 2021/10/04 21:13:20 by vcollazo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ char	*ft_itoa(int n)
 	int		sign;
 	char	*ptr;
 
+	printf("\nn: %i", n);
 	sign = 0;
 	nbr = n;
 	len = ft_nbrlen(n);
@@ -49,6 +50,7 @@ char	*ft_itoa(int n)
 	ptr = (char *)malloc((len + sign) * sizeof(char));
 	ptr[len] = '\0';
 	ft_nbrtostr(ptr, nbr, len);
+	printf("\nptr: %s", ptr);
 
 	return (ptr);
 }
