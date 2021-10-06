@@ -6,51 +6,60 @@
 /*   By: vcollazo <vcollazo@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/30 13:09:48 by vcollazo          #+#    #+#             */
-/*   Updated: 2021/10/04 21:13:20 by vcollazo         ###   ########.fr       */
+/*   Updated: 2021/10/06 22:10:45 by vcollazo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int ft_nbrlen(int n)
+static char	*ft_array(char *x, unsigned int number, long int len)
 {
-	int	len;
+	while (number > 0)
+	{
+		x[len--] = 48 + (number % 10);
+		number = number / 10;
+	}
+	return (x);
+}
+
+static long int	ft_len(int n)
+{
+	int					len;
+
 	len = 0;
-	while (n / 10 != 0)
+	if (n <= 0)
+		len = 1;
+	while (n != 0)
 	{
 		len++;
 		n = n / 10;
 	}
-	return (len);	
-}
-
-static char	*ft_nbrtostr(char *c, unsigned int nbr, int len)
-{
-	while (nbr > 0)
-	{
-		c[--len] = 48 + (nbr % 10);
-		nbr = nbr / 10;
-	}
-	return (c);
+	return (len);
 }
 
 char	*ft_itoa(int n)
 {
-	int		nbr;
-	int		len;
-	int		sign;
-	char	*ptr;
+	char				*x;
+	long int			len;
+	unsigned int		number;
+	int					sign;
 
-	printf("\nn: %i", n);
-	sign = 0;
-	nbr = n;
-	len = ft_nbrlen(n);
+	sign = 1;
+	len = ft_len(n);
+	x = malloc(sizeof(char) * (len + 1));
+	if (!x)
+		return (NULL);
+	x[len--] = '\0';
+	if (n == 0)
+		x[0] = '0';
 	if (n < 0)
-		sign = 1; 
-	ptr = (char *)malloc((len + sign) * sizeof(char));
-	ptr[len] = '\0';
-	ft_nbrtostr(ptr, nbr, len);
-	printf("\nptr: %s", ptr);
-
-	return (ptr);
+	{
+		sign *= -1;
+		number = n * -1;
+		x[0] = '-';
+	}
+	else
+		number = n;
+	x = ft_array(x, number, len);
+	return (x);
 }

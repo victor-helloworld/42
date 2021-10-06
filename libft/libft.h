@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
+#include <limits.h>
 
 // PART 1
 int		ft_atoi(const char *str);
