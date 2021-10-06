@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+/* ************************************************************************* */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
@@ -12,161 +12,90 @@
 
 #include "libft.h"
 
-void	ft_putchar(char c)
+static int	ft_word(char const *s, char c)
 {
-	write (1, &c, 1);
-}
-
-void	ft_putstr(const char *str)
-{
-	int i;
+	unsigned int	i;
+	int				w;
 
 	i = 0;
-
-	while (str[i])
+	w = 0;
+	if (ft_strlen(s) == 0)
+		return (0);
+	if (s[i] == c)
 	{
-		ft_putchar(str[i]);
-		i += 1;
+		while (s[i] == c)
+			i++;
+		if (i == (ft_strlen(s) - 1))
+			return (0);
 	}
+	i = 1;
+	w = 1;
+	while (i < (ft_strlen(s) - 1))
+	{
+		if ((s[i] == c) && (s[i - 1] != c))
+			w++;
+		i++;
+	}
+	if (s[i] == c && s[i - 1] == c && w > 0 && ft_strlen(s) > 0)
+		w = w - 1;
+	return (w);
 }
 
-void	ft_putnbr(int n)
+static size_t	wo(char const *s, char c)
 {
-	if(n >= 10)
-	{
-		ft_putnbr(n / 10);
-		ft_putnbr(n % 10);
-	}
-	else
-	{
-		ft_putchar(n + '0');
-	}
-}
-
-int	isin_sep(char c, char charset)
-{
-	if (c == charset)
-		return (1);
-	return (0);
-}
-
-void	fill_array(char **ptr_array, const char *str, char charset)
-{
-	int	counter;
 	size_t	i;
-	int	c;
 
-	counter = -1;
-	i = -1;
-	c = -1;
-	while (str[++i])
-	{
-		if (!isin_sep(str[i], charset))
-		{
-			if (i == 0 || counter == -1)
-				++counter;
-			ptr_array[counter][++c] = str[i];
-			if (isin_sep(str[i + 1], charset) || i + 1 == ft_strlen((char *)str))
-			{
-				ptr_array[counter][++c] = '\0';
-				c = -1;
-				counter++;
-			}
-		}
-	}
+	i = 0;
+	while ((s[i] != c) && (i < (ft_strlen(s))))
+		i++;
+	return (i);
 }
 
-void	ptr_allocation(char **ptr_array, const char *str, char charset)
+static int	ft_r(char const *s, char c)
 {
-	int	i;
-	int	c;
-	int	i_word;
+	size_t	i;
 
-	i = -1;
-	i_word = -1;
-	c = 0;
-	while (str[++i])
-	{
-		if (!isin_sep(str[i], charset))
-		{
-			c++;
-			if (i == 0)
-				i_word++;
-			if ((str[i + 1] == 0) || isin_sep(str[i + 1], charset))
-			{
-				ptr_array[i_word] = malloc((c + 1) * sizeof(char));
-				c = 0;
-			}
-		}
-		else if (!isin_sep(str[i + 1], charset) && str[i + 1] != 0)
-			i_word++;
-	}
+	i = 0;
+	while ((s[i] == c) && (i < (ft_strlen(s))))
+		i++;
+	return (i);
 }
 
-char	**ft_split(char const *str, char c)
+static char	**ft_nosplit(char const *s)
 {
-	int		nb_str;
-	char	**ptr_array;
-	int		i;
-	int		j;
-	int		l;
+	char	**str;
 
+	str = malloc(sizeof(char *) * 2);
+	str[0] = (ft_strdup(s));
+	str[1] = 0;
+	return (str);
+}
 
-	if (c == '\0')
-		return (NULL);
+char	**ft_split(char const *s, char c)
+{
+	unsigned int		i[3];
+	char				**str;
 
+	i[2] = 0;
+	if (!s)
+		return (0);
+	if ((ft_strchr(s, c) == 0) && ft_strlen(s) > 0)
+		return (ft_nosplit(s));
+	if (s[i[2]] == c)
+		i[2] = ft_r(s, c);
+	i[0] = ft_word(&s[i[2]], c);
+	str = malloc(sizeof(char *) * (i[0] + 1));
 	if (!str)
-		return (NULL);
-	
-	l = ft_strlen(str);
-	ft_putchar('\n');
-	ft_putstr("_________________________________________________________________________________________________________");
-	ft_putchar('\n');
-	ft_putstr("str value:");
-	ft_putstr(str);
-	ft_putstr("ªªªªlen:");
-	ft_putnbr(l);
-	ft_putstr("ªªªªchar_c:");
-	ft_putchar(c);
-	ft_putstr("ªªªªascii_c:");
-	ft_putnbr((int)c);
-	ft_putchar('\n');
-
-	//printf("\n\n\nstr: %s, len: %i, char: %c, ascii_char: %i", str, l, c, c);
-	i = -1;
-	j = -1;
-	nb_str = 0;
-	if (++i == 0 && !isin_sep(str[i], c))
-		++nb_str;
-	while (++i < l && str[i])
+		return (0);
+	i[1] = 0;
+	while (i[1] < i[0])
 	{
-//		ft_putnbr(i);
-//		ft_putchar('\n');
-//		ft_putstr("is in sep (0 is not):");
-//		ft_putnbr(isin_sep(str[i], c));
-//		ft_putchar('\n');
-		if (i < l - 1 && ((isin_sep(str[i], c) && !isin_sep(str[i + 1], c))
-				|| str[i + 1] == '\0'))
-				{
-					++nb_str;
-					ft_putstr("nb_str_while:");
-					ft_putnbr(nb_str);
-					ft_putchar('\n');
-				}
+		str[i[1]] = ft_substr(s, i[2], (wo(&s[i[2]], c)));
+		if ((str[i[1]][(ft_strlen(str[i[1]]) - 1)]) == c)
+			str[i[1]] = ft_substr(str[i[1]], 0, (ft_strlen(str[i[1]]) - 1));
+		i[2] = i[2] + wo(&s[i[2]], c) + ft_r(&s[i[2] + (wo(&s[i[2]], c))], c);
+		i[1]++;
 	}
-	if (nb_str == 0)
-		return (NULL);
-	ptr_array = malloc((nb_str + 1) * sizeof(char *));
-	if (!ptr_array)
-		return (NULL);
-	ptr_allocation(ptr_array, str, c);
-	fill_array(ptr_array, str, c);
-	ptr_array[nb_str] = 0;
-	while (ptr_array[++j])
-	{
-		ft_putstr("split_array: ");
-		ft_putstr(ptr_array[j]);
-		ft_putchar('\n');
-	}
-	return (ptr_array);
+	str[i[1]] = 0;
+	return (str);
 }
