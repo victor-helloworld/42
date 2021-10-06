@@ -9,10 +9,10 @@ git config --global credential.helper cache
 ///////////////////////////////////////////////////////////////////////////////
 #Token 1
 	#Type:		Personal token
-	#Generated:	September 23 2021
+	#Generated:	October 6 2021
 	#Validity:	unlimited
 	#Use:		Xiaomi laptop and personal devices
-	#key:		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
+	#key:		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
 
 #Token 2
 	#Type:		42 token
