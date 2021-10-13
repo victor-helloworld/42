@@ -79,13 +79,13 @@ SRCS = ft_atoi.c\
 
 BONUS =	ft_lstadd_back_bonus.c\
 		ft_lstadd_front_bonus.c\
-#		ft_lstclear.c\
-#		ft_lstdelone.c\
-#		ft_lstiter.c\
-#		ft_lstlast.c\
-#		ft_lstmap.ci\
-#		ft_lstnew.c\
-#		ft_lstsize.c\
+		ft_lstclear.c\
+		ft_lstdelone.c\
+		ft_lstiter.c\
+		ft_lstlast.c\
+		ft_lstmap.ci\
+		ft_lstnew.c\
+		ft_lstsize.c\
 
 OBJS = ${SRCS:.c=.o}
 
