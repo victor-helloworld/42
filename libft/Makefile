@@ -77,7 +77,19 @@ SRCS = ft_atoi.c\
 	   ft_strtrim.c\
 	   ft_substr.c
 
+BONUS =	ft_lstadd_back_bonus.c\
+		ft_lstadd_front_bonus.c\
+#		ft_lstclear.c\
+#		ft_lstdelone.c\
+#		ft_lstiter.c\
+#		ft_lstlast.c\
+#		ft_lstmap.ci\
+#		ft_lstnew.c\
+#		ft_lstsize.c\
+
 OBJS = ${SRCS:.c=.o}
+
+BONUS_OBJS	= $(BONUS:.c=.o)
 
 NAME = libft.a
 
@@ -113,4 +125,4 @@ re:		fclean all fclean
 #Makefile targets are by default "file targets"
 #"File targets" are used to build files from other files
 # .PHONY rules are fictitial rules (always out of date)
-.PHONY:		all clean fclean re
+.PHONY:		all clean fclean re bonus
