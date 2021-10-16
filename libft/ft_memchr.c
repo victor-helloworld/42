@@ -6,7 +6,7 @@
 /*   By: vcollazo <vcollazo@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 13:01:10 by vcollazo          #+#    #+#             */
-/*   Updated: 2021/10/06 18:55:21 by vcollazo         ###   ########.fr       */
+/*   Updated: 2021/10/16 12:21:46 by vcollazo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	*ft_memchr(const void *s, int c, size_t n)
 {
-	size_t		i;
+	size_t			i;
 	unsigned char	*str;
 
 	c = (unsigned char)c;

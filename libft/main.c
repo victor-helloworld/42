@@ -1,5 +1,17 @@
-#include <stdio.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vcollazo <vcollazo@student.42madrid>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/16 15:47:45 by vcollazo          #+#    #+#             */
+/*   Updated: 2021/10/16 15:48:02 by vcollazo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 //ubuntu #include <bsd/string.h>
+#include <stdio.h>
 #include <string.h>
 #include "libft.h"
 #include <stdlib.h>

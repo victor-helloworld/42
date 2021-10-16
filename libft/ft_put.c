@@ -6,16 +6,16 @@
 /*   By: vcollazo <vcollazo@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 16:32:33 by vcollazo          #+#    #+#             */
-/*   Updated: 2021/10/06 19:24:08 by vcollazo         ###   ########.fr       */
+/*   Updated: 2021/10/16 12:24:57 by vcollazo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-
 void	ft_putnbr(int n);
 
-// ft_putchar prints non printable characters (\n,...) providing the ascii number and a ' '
+// ft_putchar prints non printable characters (\n,...)
+// providing the ascii number and a ' '
 void	ft_putchar(char c)
 {
 	if (c > 32)
@@ -25,15 +25,13 @@ void	ft_putchar(char c)
 		ft_putnbr(c);
 		write(1, " ", 1);
 	}
-
 }
 
 void	ft_putstr(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
-
 	while (str[i])
 	{
 		ft_putchar(str[i]);
@@ -43,7 +41,7 @@ void	ft_putstr(char *str)
 
 void	ft_putnbr(int n)
 {
-	if(n >= 10)
+	if (n >= 10)
 	{
 		ft_putnbr(n / 10);
 		ft_putnbr(n % 10);
@@ -56,10 +54,9 @@ void	ft_putnbr(int n)
 
 void	ft_putstrascii(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
-
 	while (str[i])
 	{
 		ft_putnbr(str[i]);
@@ -73,7 +70,6 @@ static int	chrinset(char c, char const *set)
 	int	i;
 
 	i = -1;
-
 	while (set[++i])
 	{
 		if (set[i] == c)

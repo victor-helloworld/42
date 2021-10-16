@@ -6,7 +6,7 @@
 /*   By: vcollazo <vcollazo@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 22:39:33 by vcollazo          #+#    #+#             */
-/*   Updated: 2021/10/06 18:59:06 by vcollazo         ###   ########.fr       */
+/*   Updated: 2021/10/16 13:39:57 by vcollazo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*ft_strrchr(const char *s, int c)
 	c = (unsigned char) c;
 	len = ft_strlen(s);
 	if (s[len] == c)
-		return(char *)(s + len);
+		return ((char *)(s + len));
 	while (s[--len])
 	{
 		if (s[len] == c)
@@ -29,4 +29,3 @@ char	*ft_strrchr(const char *s, int c)
 	}
 	return (0);
 }
-

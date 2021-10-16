@@ -6,11 +6,11 @@
 /*   By: vcollazo <vcollazo@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/30 13:07:59 by vcollazo          #+#    #+#             */
-/*   Updated: 2021/09/30 16:15:53 by vcollazo         ###   ########.fr       */
+/*   Updated: 2021/10/16 12:28:05 by vcollazo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
- #include "libft.h"
+#include "libft.h"
 
 static void	ft_putchar(char x, int fd)
 {

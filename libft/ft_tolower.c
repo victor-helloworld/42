@@ -6,11 +6,13 @@
 /*   By: vcollazo <vcollazo@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 22:41:29 by vcollazo          #+#    #+#             */
-/*   Updated: 2021/09/22 22:41:38 by vcollazo         ###   ########.fr       */
+/*   Updated: 2021/10/16 14:00:02 by vcollazo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_tolower(int c)
 {
-	return ((c > 64 && c < 91) ? c + 32 : c);
-}                                       
+	if (c > 64 && c < 91)
+		return (c + 32);
+	return (c);
+}
