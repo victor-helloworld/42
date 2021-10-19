@@ -6,7 +6,7 @@
 /*   By: vcollazo <vcollazo@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 13:14:35 by vcollazo          #+#    #+#             */
-/*   Updated: 2021/10/06 22:18:43 by vcollazo         ###   ########.fr       */
+/*   Updated: 2021/10/19 13:31:03 by vcollazo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ char	*ft_strnstr(const char *s1, const char *s2, size_t n)
 	size_t		i;
 
 	i = 0;
+	if (s1[0] == '\0')
+		return (NULL);
 	if (s2[0] == '\0')
 		return ((char *)s1);
 	if (s2 == NULL || ft_strlen(s2) == 0)

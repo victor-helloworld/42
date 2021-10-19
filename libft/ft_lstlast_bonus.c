@@ -6,7 +6,7 @@
 /*   By: vcollazo <vcollazo@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 16:47:50 by vcollazo          #+#    #+#             */
-/*   Updated: 2021/10/16 17:41:19 by vcollazo         ###   ########.fr       */
+/*   Updated: 2021/10/19 13:46:50 by vcollazo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_list	*ft_lstlast(t_list *lst)
 	t_list	*tmp;
 
 	if (!lst)
-		return NULL;
+		return (NULL);
 	tmp = lst;
 	while (tmp->next)
 		tmp = tmp->next;
